@@ -37,11 +37,11 @@ export default {
   methods:{
     async save(){
       if(this.id){
-        const res = await this.$http.put(`rest/categories/${this.id}`, this.model)
+        const res = await this.$http.put(`rest/items/${this.id}`, this.model)
       }else{
-        const res = await this.$http.post('rest/categories', this.model)
+        const res = await this.$http.post('rest/items', this.model)
       }
-      this.$router.push('/categories/list')
+      this.$router.push('/items/list')
       this.$message({
         type: 'success',
         message: '保存成功'
@@ -54,12 +54,12 @@ export default {
     },
 
     async fetch(){
-      const res = await this.$http.get(`rest/categories/${this.id}`)
+      const res = await this.$http.get(`rest/items/${this.id}`)
       this.model = res.data
     },
 
     async fetchParents(){
-      const res = await this.$http.get(`rest/categories`)
+      const res = await this.$http.get(`rest/items`)
       this.parents = res.data
     }
   },
