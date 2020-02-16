@@ -3,6 +3,7 @@
     <h1 class="el-text-l">{{id ? '编辑': '新增'}}分类</h1>
     <el-form ref="form" label-width="80px" @submit.native.prevent="save">
       <el-form-item label="父级">
+        {{model}}
         <el-select v-model="model.parent" placeholder="请选择">
           <el-option
             v-for="item in parents"
@@ -30,10 +31,8 @@ export default {
   data(){
     return {
       model:{
-        parent: '',
-        name: ''
       },
-      parents: {}
+      parents: []
     }
   },
   methods:{
@@ -43,16 +42,16 @@ export default {
       }else{
         const res = await this.$http.post('categories', this.model)
       }
-      // this.$router.push('/categories/list')
+      this.$router.push('/categories/list')
       this.$message({
         type: 'success',
         message: '保存成功'
       })
-      this.model = {
-        parent: '',
-        name: ''
-      }
-      this.fetchParents()
+      // this.model = {
+      //   parent: '',
+      //   name: ''
+      // }
+      // this.fetchParents()
     },
 
     async fetch(){
