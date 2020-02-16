@@ -10,8 +10,27 @@ module.exports = app => {
     next()
   }, router)
 
+  const multer = require('multer')
+  const upload = multer({ dest: __dirname + '\\..\\..\\uploads'})
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, __dirname + '\\..\\..\\uploads')
+    },
+    filename: function (req, file, cb) {
+      var fileFormat = (file.originalname).split(".");
+      cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+    }
+  })
+  // var upload = multer({ storage: storage })
+  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+    const file = req.file
+    file.url = 'http://localhost:4000/uploads/'+ file.filename
+    res.send(file)
+  })
+
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body);
+    console.log(req.Model,model)
     res.send(model)
   })
 

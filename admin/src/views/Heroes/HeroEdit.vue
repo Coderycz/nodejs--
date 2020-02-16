@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h1 class="el-text-l">{{id ? '编辑': '新增'}}物品</h1>
+    <h1 class="el-text-l">{{id ? '编辑': '新增'}}英雄</h1>
     <el-form ref="form" label-width="80px" @submit.native.prevent="save">
       <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
-      <el-form-item label="图标">
+      <el-form-item label="头像">
         <el-upload
           class="avatar-uploader"
           :action="$http.defaults.baseURL + '/upload'"
           :show-file-list="false"
           :on-success="afterUpload"
         >
-          <img v-if="model.icon" :src="model.icon" class="avatar" />
+          <img v-if="model.avatar" :src="model.avatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -29,21 +29,21 @@ export default {
   },
   data() {
     return {
-      model: {icon: '',name: ''},
+      model: {avatar: '',name: ''},
     };
   },
   methods: {
     afterUpload(res) {
-      this.$set(this.model, 'icon' , res.url)
+      this.$set(this.model, 'avatar' , res.url)
       // this.model.icon = res.url
     },
     async save() {
       if (this.id) {
-        const res = await this.$http.put(`rest/items/${this.id}`, this.model);
+        const res = await this.$http.put(`rest/heroes/${this.id}`, this.model);
       } else {
-        const res = await this.$http.post("rest/items", this.model);
+        const res = await this.$http.post("rest/heroes", this.model);
       }
-      this.$router.push("/items/list");
+      this.$router.push("/heroes/list");
       this.$message({
         type: "success",
         message: "保存成功"
@@ -56,7 +56,7 @@ export default {
     },
 
     async fetch() {
-      const res = await this.$http.get(`rest/items/${this.id}`);
+      const res = await this.$http.get(`rest/heroes/${this.id}`);
       this.model = res.data;
     },
 
