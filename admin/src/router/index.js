@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Main from '../views/Main'
-import CategoryEdit from '../views/CategoryEdit'
-import CategoryList from '../views/CategoryList'
+import CategoryEdit from '../views/Categories/CategoryEdit'
+import CategoryList from '../views/Categories/CategoryList'
 
 Vue.use(VueRouter)
 
