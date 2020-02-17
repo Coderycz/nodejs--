@@ -2,14 +2,15 @@
   <div>
     <h1>分类名称</h1>
     <el-table :data="items" style="width: 100%">
-      <el-table-column prop="_id" label="日期" width="300"></el-table-column>
-      <el-table-column prop="icon" label="图片" >
+      <el-table-column prop="_id" label="id" width="300"></el-table-column>
+      <el-table-column prop="icon" label="头像" >
         <template slot-scope="scope">
           <img :src="scope.row.avatar" alt="" style="height: 3rem">            
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="分类名称" ></el-table-column>
-       <el-table-column
+      <el-table-column prop="name" label="名字" ></el-table-column>
+      <el-table-column prop="title" label="称号" ></el-table-column>
+      <el-table-column
       fixed="right"
       label="操作"
       width="100">
