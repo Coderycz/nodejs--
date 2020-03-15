@@ -25,9 +25,9 @@
           </el-form-item>
 
           <el-form-item label="分类">
-            <el-select v-model="model.categroies" placeholder="选择分类" multiple>
+            <el-select v-model="model.categories" placeholder="选择分类" multiple>
               <el-option
-                v-for="item in categroies"
+                v-for="item in categories"
                 :key="item._id"
                 :label="item.name"
                 :value="item._id"
@@ -139,7 +139,7 @@ export default {
           survive: 0
         }
       },
-      categroies: {},
+      categories: {},
       items: {}
     };
   },
@@ -173,7 +173,7 @@ export default {
 
     async fetchCategories() {
       const res = await this.$http.get(`rest/categories`);
-      this.categroies = res.data;
+      this.categories = res.data;
     },
 
     async fetchItems() {
